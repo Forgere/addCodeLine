@@ -30,6 +30,10 @@ const file = {
         })
     },
     dealWithJS: function(files){
+        this.formatImportInJS(files)
+    },
+
+    formatImportInJS: function(files){
         const rule = /import[\s\S]*?{([\S\s]*?)}[\s\S]*?from/g;
         (function next(index) {
             if(index < files.length) {

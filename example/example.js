@@ -1,1 +1,6 @@
-import{ Breadcrumb, Button, Message, Input } from'@bone/next';
+import{
+  Breadcrumb,
+  Button,
+  Message,
+  Input,
+} from'@bone/next';
