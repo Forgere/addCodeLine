@@ -15,7 +15,9 @@ const file = {
                     const pathname = path.join(dir, file)
             
                     if (fs.statSync(pathname).isDirectory()){
-                        readProjectSync(pathname)
+                        if (!pathname.includes('node_modules')) {
+                            readProjectSync(pathname)
+                        }
                     } else {
                         if (ext.js.includes(path.extname(file))) {
                             results.push(pathname)
@@ -29,11 +31,11 @@ const file = {
             resolve(results)
         })
     },
-    dealWithJS: function(files){
-        this.formatImportInJS(files)
+    dealWithJS: function(files, space=2){
+        this.formatImportInJS(files, space)
     },
 
-    formatImportInJS: function(files){
+    formatImportInJS: function(files, space=2){
         const rule = /import[\s\S]*?{([\S\s]*?)}[\s\S]*?from/g;
         (function next(index) {
             if(index < files.length) {
@@ -54,10 +56,11 @@ const file = {
                                     let innerRule = /import[\s\S]*{([\S\s]*)}[\s\S]*from/
                                     const matchContent = matchContents[number].match(innerRule);
                                     if (matchContent) {
-                                        const replacement = matchContent[1].split(',').filter(val => val.trim() !== "").map(val => '  '+val.trim()+',').join('\n')
+                                        const matchContentArray = matchContent[1].split(',').filter(val => val.trim() !== "")
+                                        if (matchContentArray.length <= 1) return inner(number + 1)
+                                        const replacement = matchContentArray.map(val => space === 2 ? '  ' : '    '+val.trim()+',').join('\n')
                                         if (matchContent[1].trim() === replacement.trim()) {
                                             return inner(number+1)
-                                            
                                         }
                                         var result = fs.readFileSync(element).toString().replace(matchContent[1], "\n"+replacement+"\n");
 
