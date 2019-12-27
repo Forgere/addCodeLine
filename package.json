@@ -1,0 +1,15 @@
+{
+  "name": "addcodeline",
+  "version": "1.0.0",
+  "description": "add lines for your code, fuck off the count of code line",
+  "main": "index.js",
+  "scripts": {
+    "test": "mocha"
+  },
+  "repository": {
+    "type": "git",
+    "url": "\"\""
+  },
+  "author": "forgere",
+  "license": "ISC"
+}
