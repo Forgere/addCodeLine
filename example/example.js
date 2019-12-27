@@ -1,6 +1,0 @@
-import{
-  
-  
-  
-  
-} from'@bone/next';

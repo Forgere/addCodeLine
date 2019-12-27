@@ -11,5 +11,8 @@
     "url": "\"\""
   },
   "author": "forgere",
-  "license": "ISC"
+  "license": "ISC",
+  "devDependencies": {
+    "mocha": "^6.2.2"
+  }
 }
